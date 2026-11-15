@@ -33,7 +33,7 @@
 - **（必含）你的笔试文档**：本副本「ROOT 全栈岗位笔试——周文波」，权限 public
 - **（必含）已部署的可测试链接（自行部署）**：https://wbapp-y5wxetvgn0wc7wvssf372f.app.workbuddy.host/?sharecode=SY54IO7FE7
 - **（必含）代码链接（GitHub）**：https://github.com/13327228383/Atoms-Demo （public / MIT）
-- **（可选）AI coding 工具账单**：本次使用 WorkBuddy / Claude Code 辅助开发；账单未随仓库提交，如需可另附
+- **（可选）AI coding 工具账单**：本次主要使用 WorkBuddy（AI 编程助手）辅助开发；无订阅账单可提供，故不附，也不编造工具与金额
 
 > 在线链接请完整保留 `?sharecode=`：发布网关依赖该参数放行，裸域名会被判为「链接不完整」。
 > GitHub Pages 只能托管静态资源，不能运行本项目的 Node HTTP 服务，因此源码公开在 GitHub、在线 Demo 由支持单端口 HTTP 应用的平台托管，两者均免费。

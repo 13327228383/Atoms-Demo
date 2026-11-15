@@ -170,7 +170,7 @@ OpenAI 兼容通道的真实调用、移动端真机、复杂需求下模型输�
 1. **（必含）笔试文档副本（已创建并设为 public）**：https://vcnbzw1k99ca.feishu.cn/docx/Vv5xd38S4oouoixCeqMc7csznSh —— 标题「ROOT 全栈岗位笔试——周文波」，正文即 `FEISHU_COPY.md`（去掉顶部操作说明后写入），链接分享已设为「互联网上获得链接的人可阅读」（`link_share_entity=anyone_readable`、`external_access=true`），评论 0 条。原笔试文档未做任何修改。
 2. **（必含）已部署的可测试链接**：https://wbapp-y5wxetvgn0wc7wvssf372f.app.workbuddy.host/?sharecode=SY54IO7FE7
 3. **（必含）GitHub 代码链接**：https://github.com/13327228383/Atoms-Demo （public，MIT）
-4. **（可选加分）AI coding 工具账单**：本次使用 WorkBuddy / Claude Code 辅助开发；账单未随仓库提交，如需可另附，不编造金额。
+4. **（可选加分）AI coding 工具账单**：本次主要使用 WorkBuddy（AI 编程助手）辅助开发；无订阅账单可提供，故不附，也不编造工具与金额。
 
 检查无误后，把**飞书文档副本链接**发送给对接的招聘 HR。
 
