@@ -10,6 +10,8 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const { buildMessages, extractHtml, streamCompletion, probeModels } = require('./lib/llm');
+const store = require('./lib/store');
+store.init();
 
 // 轻量 .env 载入：只在进程内生效，不写入任何文件，键不会下发到前端。
 (function loadEnv() {
@@ -172,7 +174,7 @@ async function handleConfig(res) {
   });
 }
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
   const p = url.pathname;
 
@@ -180,9 +182,18 @@ const server = http.createServer((req, res) => {
     const modelLabel = PROVIDER === 'cloud'
       ? 'cloud-sdk (浏览器端免密钥模型)'
       : (PROVIDER === 'ollama' ? config.ollamaModel : config.openaiModel);
-    return sendJson(res, 200, { status: 'ok', provider: PROVIDER, model: modelLabel });
+    return sendJson(res, 200, { status: 'ok', provider: PROVIDER, model: modelLabel, persistence: store.stats() });
   }
   if (req.method === 'GET' && p === '/api/config') return handleConfig(res);
+  if (req.method === 'GET' && p === '/api/sessions') {
+    return sendJson(res, 200, Object.assign(store.stats(), { items: store.listSessions(url.searchParams.get('limit') || 20) }));
+  }
+  if (req.method === 'POST' && p === '/api/sessions') {
+    let body;
+    try { body = await readBody(req); } catch (e) { return sendJson(res, 400, { error: e.message }); }
+    if (!body || !body.id) return sendJson(res, 400, { error: '缺少会话 id' });
+    return sendJson(res, 200, store.saveSession(body));
+  }
   if (req.method === 'POST' && p === '/api/generate') return handleGenerate(req, res);
   if (req.method === 'GET') return serveStatic(req, res, p);
   sendJson(res, 405, { error: 'method not allowed' });

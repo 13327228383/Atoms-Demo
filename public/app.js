@@ -327,6 +327,7 @@ async function generate(idea, opts) {
       };
       state.versions.push(v);
       state.activeId = v.id;
+      if (window.AtomsPersist) window.AtomsPersist.save(state);
       updateVersionSelect();
       updateCode();
       switchTab('preview');
@@ -365,6 +366,7 @@ window.addEventListener('message', (e) => {
   const v = state.versions.find((x) => x.id === ac.versionId);
   if (!v) return;
   v.report = d.payload;
+  if (window.AtomsPersist) window.AtomsPersist.save(state);
   // 只刷新当前正在查看的版本，避免后台版本的自检结果覆盖用户眼前的报告
   if (state.activeId === v.id) {
     renderReport(v);
@@ -388,6 +390,7 @@ function resetAll() {
   state.versions = [];
   state.activeId = null;
   state.retryUsed = {};
+  if (window.AtomsPersist) window.AtomsPersist.clear();
   if (state.activeCheck) { clearTimeout(state.activeCheck.timer); state.activeCheck = null; }
   $('messages').innerHTML = '';
   $('preview').srcdoc = '';
@@ -401,7 +404,24 @@ function resetAll() {
 }
 
 async function init() {
-  addMsg('agent', '欢迎。描述一个你想要的应用，我会生成一个完整可运行的单文件网页应用，在右侧实时预览，并自动做浏览器冒烟自检。');
+  const restored = window.AtomsPersist && window.AtomsPersist.restore();
+  if (restored) {
+    state.versions = restored.versions;
+    state.activeId = restored.activeId || state.versions[state.versions.length - 1].id;
+    $('previewWrap').classList.remove('hidden');
+    $('empty').classList.add('hidden');
+    $('suggestions').classList.add('hidden');
+    updateVersionSelect();
+    updateCode();
+    switchTab('preview');
+    const rv = currentVersion();
+    renderReport(rv);
+    if (rv) renderPreview(rv, false);
+    addMsg('ok', `已从本地持久化恢复 ${state.versions.length} 个版本与自检报告，刷新后无需重新生成。`);
+    window.AtomsPersist.badge('● 已从本地恢复 ' + state.versions.length + ' 个版本');
+  } else {
+    addMsg('agent', '欢迎。描述一个你想要的应用，我会生成一个完整可运行的单文件网页应用，在右侧实时预览，并自动做浏览器冒烟自检。');
+  }
   try {
     state.probeCode = await (await fetch('/probe.js')).text();
   } catch (e) {
@@ -410,6 +430,7 @@ async function init() {
   try {
     const cfg = await (await fetch('/api/config')).json();
     state.config = cfg;
+    if (window.AtomsPersist && state.versions.length) window.AtomsPersist.save(state);
     const badge = $('modelBadge');
     if (cfg.provider === 'cloud') {
       badge.className = 'badge';
@@ -458,6 +479,7 @@ async function init() {
   $('newBtn').addEventListener('click', resetAll);
   $('versionSelect').addEventListener('change', (e) => {
     state.activeId = e.target.value;
+    if (window.AtomsPersist) window.AtomsPersist.save(state);
     const v = currentVersion();
     if (!v) return;
     updateCode();

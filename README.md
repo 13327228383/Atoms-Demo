@@ -64,7 +64,7 @@ LLM_PROVIDER=openai OPENAI_BASE_URL=... OPENAI_API_KEY=... OPENAI_MODEL=... node
 - **核心主流程**：自然语言输入 → SSE / SDK 流式展示生成过程 → `iframe sandbox` 实时渲染 → 多轮对话迭代 → 版本历史切换 → 查看完整源码 / 复制 / 下载 `.html`。
   本地自托管模式把上一版**完整源码**回传模型做增量修改；云端模式因发布域 WAF 会拦截请求体里的 HTML 标签字面量，改传等价的**纯文本结构摘要**，详见 `tests/results/online/WAF_ROOTCAUSE.md`。
 - **延展能力（自动冒烟自检闭环）**：探针注入预览 iframe，真实捕获未捕获异常与 `console.error`、统计 DOM 渲染、清点可交互控件、给空文本框填测试值后真实点击最多 3 个按钮并比对点击前后的可见变化、检查外链资源。失败项原文回灌模型自动重生成一次；探针超时不会被算作通过。
-- **无需注册**：打开即用，无登录、无数据库、无外部依赖。
+- **无需注册**：打开即用，无登录、无外部依赖；会话与版本通过 SQLite + 浏览器 localStorage 双层持久化，刷新可恢复。
 
 ## 接口
 
@@ -73,6 +73,8 @@ LLM_PROVIDER=openai OPENAI_BASE_URL=... OPENAI_API_KEY=... OPENAI_MODEL=... node
 | `GET /health` | 健康检查（返回 provider 与模型标签） |
 | `GET /api/config` | 当前 provider / 模型 / 在线状态（不返回密钥） |
 | `POST /api/generate` | SSE 流式生成，事件类型 `status` / `delta` / `done` / `error`；`cloud` 模式返回 400 |
+| `POST /api/sessions` | 保存会话摘要到服务端 SQLite，返回 `{id, engine, persistent}` |
+| `GET /api/sessions` | 持久化引擎真实状态与最近会话列表（`engine` / `persistent` / `sessions` / `items`） |
 
 ## 目录
 
@@ -110,9 +112,18 @@ CDP_PORT=9229 RESULTS_SUBDIR=online node tests/e2e_cdp.js
 
 > 结果 JSON 中生成字符数、自检项、`pageExceptions` / `consoleErrors` / `success` 均为结构化字段；`startedAt` / `durationMs` / `durationHuman` 记录脚本真实墙钟耗时，复跑自动产出。本仓库归档的早期结果生成于该耗时字段加入之前，不含耗时字段，不回填、不补造数字。
 
+## 数据持久化
+
+笔试「Demo 需满足」要求具备数据持久化，本项目用两层真实实现，均为零外部依赖：
+
+- **服务端 SQLite**：`lib/store.js` 使用 Node 内置 `node:sqlite`（Node 22+）把会话与生成记录写入 `data/atoms.db`；运行时不支持时自动降级为 `data/sessions.json` 文件，再不行才退回内存，并把真实引擎名与 `persistent` 状态经 `/health`、`/api/sessions` 如实暴露，不假装保存成功。
+- **浏览器 localStorage**：`public/persist.js` 把完整版本（含 HTML 源码与自检报告）存在本地，刷新页面后自动恢复版本下拉、预览、代码页与自检报告。线上部署沙箱的服务端文件不保证跨重启存活，因此浏览器这一层是公网 Demo 上可靠的持久化。
+- **为什么不把 HTML 源码同步到服务端**：线上发布域前置 WAF 会拦截请求体里的 HTML 标签字面量（见 `tests/results/online/WAF_ROOTCAUSE.md`）。服务端只存元数据摘要（版本 id、需求文本、模型、字符数、自检结论、时间），完整源码留在浏览器本地。
+- 任何一层失败都会在页面的持久化徽章上如实标注，不会显示假的「已保存」。`data/` 与 `*.db` 已加入 `.gitignore`，不进入开源仓库。
+
 ## 公网部署
 
-服务已按单端口 HTTP 应用设计：监听 `PORT` 环境变量、绑定 `0.0.0.0`、零外部依赖、无数据库。本次在线 Demo 通过 WorkBuddy「发布为应用」部署，并设置 `LLM_PROVIDER=cloud`。
+服务已按单端口 HTTP 应用设计：监听 `PORT` 环境变量、绑定 `0.0.0.0`、零外部依赖。持久化用 Node 内置 `node:sqlite`（失败自动降级 JSON 文件）+ 浏览器 localStorage 两层，不依赖外部数据库服务。本次在线 Demo 通过 WorkBuddy「发布为应用」部署，并设置 `LLM_PROVIDER=cloud`。
 
 **关键前提：部署环境必须能访问一个真实模型。** 沙箱里没有本机的 Ollama；若不配置模型通道，线上点「生成」会如实报错，而不是返回伪造结果。三选一：
 

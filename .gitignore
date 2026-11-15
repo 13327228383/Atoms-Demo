@@ -5,5 +5,7 @@ node_modules/
 tests/.cdp-profile/
 tests/.cdp-profile-*/
 tests/results/tmp/
+data/
+*.db
 .DS_Store
 Thumbs.db

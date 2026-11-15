@@ -1,7 +1,8 @@
 {
   "mode": "real-browser-cdp-ui-flow",
   "base": "https://wbapp-y5wxetvgn0wc7wvssf372f.app.workbuddy.host/?sharecode=SY54IO7FE7",
-  "timestamp": "2026-11-15T11:58:35.130Z",
+  "startedAt": "2026-11-15T13:57:11.695Z",
+  "timestamp": "2026-11-15T13:57:11.704Z",
   "steps": [
     {
       "step": "启动/复用真实 Chromium",
@@ -19,7 +20,13 @@
       "response": {
         "status": "ok",
         "provider": "cloud",
-        "model": "cloud-sdk (浏览器端免密钥模型)"
+        "model": "cloud-sdk (浏览器端免密钥模型)",
+        "persistence": {
+          "engine": "sqlite",
+          "persistent": true,
+          "path": "data/atoms.db",
+          "sessions": 2
+        }
       }
     },
     {
@@ -58,23 +65,30 @@
     {
       "step": "生成中 53s",
       "ok": true,
-      "stream": "已生成 2761 字符…\n… var(--primary); }\n  .filter.active {\n    back",
+      "stream": "已生成 29 字符…\n…```html\n<!DOCTYPE html>\n<html",
       "msgs": 4,
       "btn": "生成中"
     },
     {
       "step": "生成中 63s",
       "ok": true,
-      "stream": "已生成 6306 字符…\n…d('show');\n    clearTimeout(hintTimer);\n    hi",
+      "stream": "已生成 3300 字符…\n…lter.active { background: #fff; color: var(--a",
       "msgs": 4,
       "btn": "生成中"
     },
     {
       "step": "生成中 74s",
       "ok": true,
-      "stream": "",
+      "stream": "已生成 6875 字符…\n…label=\"新任务内容\" />\n      <button class=\"primary\"",
       "msgs": 4,
-      "btn": "生成"
+      "btn": "生成中"
+    },
+    {
+      "step": "生成中 85s",
+      "ok": true,
+      "stream": "已生成 11435 字符…\n…put', function () {\n    if (input.value.trim(",
+      "msgs": 4,
+      "btn": "生成中"
     },
     {
       "step": "自动冒烟自检出报告",
@@ -96,14 +110,14 @@
     {
       "step": "预览 iframe 注入生成的应用",
       "ok": true,
-      "srcdocLength": 9900,
+      "srcdocLength": 13678,
       "hasHtml": true,
       "visible": true
     },
     {
       "step": "代码页与导出控件",
       "ok": true,
-      "length": 9900,
+      "length": 13678,
       "hasHtml": true,
       "downloadEnabled": true
     },
@@ -119,12 +133,35 @@
       "step": "v2 自动自检出报告",
       "ok": true,
       "verdict": "自检通过"
+    },
+    {
+      "step": "本地持久化徽章与 localStorage 记录",
+      "ok": true,
+      "badge": "● 已持久化 · 本地 2 个版本",
+      "lsSize": 32572
+    },
+    {
+      "step": "服务端持久化引擎与会话记录",
+      "ok": true,
+      "engine": "sqlite",
+      "persistent": true,
+      "sessions": 4
+    },
+    {
+      "step": "刷新后版本历史与自检报告恢复",
+      "ok": true,
+      "options": [
+        "v1 · 做个待办清单，能添加任务",
+        "v2 · 把标题改成「我的待办」，"
+      ],
+      "badge": "● 已持久化 · 本地 + sqlite"
     }
   ],
   "screenshots": [
     "preview.png",
     "selfcheck.png",
-    "iteration.png"
+    "iteration.png",
+    "persistence.png"
   ],
   "browser": {
     "started": true,
@@ -140,7 +177,7 @@
       {
         "status": "pass",
         "title": "DOM 实际渲染",
-        "detail": "可见文本 48 字符，DOM 节点 16 个（初始态只要求有实际渲染内容，不用文本长度卡阈值）"
+        "detail": "可见文本 77 字符，DOM 节点 19 个（初始态只要求有实际渲染内容，不用文本长度卡阈值）"
       },
       {
         "status": "pass",
@@ -153,21 +190,21 @@
         "detail": "无外链脚本、样式或图片，单文件可直接打开"
       },
       {
-        "status": "pass",
+        "status": "warn",
         "title": "真实点击探测",
-        "detail": "点击 3 个按钮，1 次引发可见 DOM 变化（点击前已给空文本框填入测试值「自检」，共填 2 次）；明细：添加→有变化、全部→无变化、未完成→无变化"
+        "detail": "点击 3 个按钮，0 次引发可见 DOM 变化（点击前已给空文本框填入测试值「自检」，共填 1 次）；明细：全部→无变化、未完成→无变化、已完成→无变化"
       }
     ],
-    "meta": "\n        可见文本 48 字符 · DOM 16 节点 ·\n        控件 6 个 ·\n        真实点击 3 次（1 次有可见变化）\n      ",
+    "meta": "\n        可见文本 77 字符 · DOM 19 节点 ·\n        控件 6 个 ·\n        真实点击 3 次（0 次有可见变化）\n      ",
     "dot": "dot ok"
   },
   "preview": {
-    "srcdocLength": 9900,
+    "srcdocLength": 13678,
     "hasHtml": true,
     "visible": true
   },
   "code": {
-    "length": 9900,
+    "length": 13678,
     "hasHtml": true,
     "downloadEnabled": true
   },
@@ -179,45 +216,131 @@
     ],
     "verdict": "自检通过"
   },
+  "persistence": {
+    "badge": "● 已持久化 · 本地 2 个版本",
+    "lsSize": 32572,
+    "server": {
+      "engine": "sqlite",
+      "persistent": true,
+      "path": "data/atoms.db",
+      "sessions": 4,
+      "items": [
+        {
+          "id": "s1794751126586ce1f6k",
+          "updated_at": 1794751259310,
+          "payload": {
+            "id": "s1794751126586ce1f6k",
+            "provider": "cloud",
+            "versions": [
+              {
+                "id": "v1794751126586wvdu",
+                "idea": "做个待办清单，能添加任务、勾选完成、删除任务",
+                "model": "Hy4",
+                "htmlLength": 13678,
+                "verdict": "pass",
+                "at": 1794751126586
+              },
+              {
+                "id": "v1794751254750ossb",
+                "idea": "把标题改成「我的待办」，并加上未完成任务计数",
+                "model": "Hy4",
+                "htmlLength": 15903,
+                "verdict": "pass",
+                "at": 1794751254750
+              }
+            ],
+            "activeId": "v1794751254750ossb",
+            "updatedAt": 1794751255988
+          }
+        },
+        {
+          "id": "waf-probe-001",
+          "updated_at": 1794751081554,
+          "payload": {
+            "id": "waf-probe-001",
+            "provider": "cloud",
+            "versions": [
+              {
+                "id": "v1",
+                "idea": "做个待办清单",
+                "htmlLength": 9900,
+                "verdict": "pass",
+                "at": 1763200000000
+              }
+            ],
+            "activeId": "v1",
+            "updatedAt": 1763200000000
+          }
+        },
+        {
+          "id": "s1794750846457cxf6gh",
+          "updated_at": 1794750916401,
+          "payload": {
+            "id": "s1794750846457cxf6gh",
+            "provider": "ollama",
+            "versions": [
+              {
+                "id": "v17947508464536mho",
+                "idea": "做个待办清单，能添加任务、勾选完成、删除任务",
+                "model": "qwen2.5:7b",
+                "htmlLength": 2422,
+                "verdict": "pass",
+                "at": 1794750846454
+              },
+              {
+                "id": "v1794750914396n5w1",
+                "idea": "把标题改成「我的待办」，并加上未完成任务计数",
+                "model": "qwen2.5:7b",
+                "htmlLength": 2716,
+                "verdict": "pass",
+                "at": 1794750914396
+              }
+            ],
+            "activeId": "v1794750914396n5w1",
+            "updatedAt": 1794750916400
+          }
+        },
+        {
+          "id": "verify-001",
+          "updated_at": 1794750717741,
+          "payload": {
+            "id": "verify-001",
+            "provider": "ollama",
+            "versions": [
+              {
+                "id": "v1",
+                "idea": "做个待办清单",
+                "htmlLength": 3238,
+                "verdict": "pass",
+                "at": 1763200000000
+              }
+            ],
+            "activeId": "v1",
+            "updatedAt": 1763200000000
+          }
+        }
+      ]
+    },
+    "restore": {
+      "options": [
+        "v1 · 做个待办清单，能添加任务",
+        "v2 · 把标题改成「我的待办」，"
+      ],
+      "badge": "● 已持久化 · 本地 + sqlite",
+      "restoredMsg": [
+        "已从本地持久化恢复 2 个版本与自检报告，刷新后无需重新生成。"
+      ]
+    }
+  },
   "messages": [
     {
-      "kind": "msg agent",
-      "text": "欢迎。描述一个你想要的应用，我会生成一个完整可运行的单文件网页应用，在右侧实时预览，并自动做浏览器冒烟自检。"
-    },
-    {
-      "kind": "msg user",
-      "text": "做个待办清单，能添加任务、勾选完成、删除任务"
-    },
-    {
-      "kind": "msg status",
-      "text": "生成完成 · Hy4 · 9912 字符"
-    },
-    {
-      "kind": "msg agent",
-      "text": "已生成 v1（9900 字符单文件 HTML），正在浏览器沙箱内自动冒烟自检…"
-    },
-    {
       "kind": "msg ok",
-      "text": "v1 自检通过：5 项检查，3 次真实点击探测。可继续用对话修改，或下载 HTML。"
-    },
-    {
-      "kind": "msg user",
-      "text": "把标题改成「我的待办」，并加上未完成任务计数"
-    },
-    {
-      "kind": "msg status",
-      "text": "生成完成 · Hy4 · 11837 字符"
-    },
-    {
-      "kind": "msg agent",
-      "text": "已生成 v2（11825 字符单文件 HTML），正在浏览器沙箱内自动冒烟自检…"
-    },
-    {
-      "kind": "msg ok",
-      "text": "v2 自检通过：5 项检查，3 次真实点击探测。可继续用对话修改，或下载 HTML。"
+      "text": "已从本地持久化恢复 2 个版本与自检报告，刷新后无需重新生成。"
     }
   ],
   "pageExceptions": [],
   "consoleErrors": [],
-  "success": true
+  "success": true,
+  "durationMs": 230847,
+  "durationHuman": "3 分 50 秒"
 }

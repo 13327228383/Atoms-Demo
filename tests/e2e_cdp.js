@@ -215,6 +215,23 @@ async function main() {
     await sleep(400);
     result.screenshots.push(await shot(cdp, 'iteration.png'));
 
+    const persistBefore = await cdp.eval(`(() => { const b = document.querySelector('#persistBadge'); return { badge: b ? b.textContent : null, lsSize: (localStorage.getItem('atoms-demo-session-v1')||'').length }; })()`);
+    result.persistence = persistBefore;
+    result.steps.push({ step: '本地持久化徽章与 localStorage 记录', ok: /已持久化/.test(persistBefore.badge || '') && persistBefore.lsSize > 100, ...persistBefore });
+
+    const serverSessions = await cdp.eval(`fetch(new URL('/api/sessions', location.href).href + (location.search || '')).then(r => r.json())`);
+    result.persistence.server = serverSessions;
+    result.steps.push({ step: '服务端持久化引擎与会话记录', ok: Boolean(serverSessions && serverSessions.engine), engine: serverSessions && serverSessions.engine, persistent: serverSessions && serverSessions.persistent, sessions: serverSessions && serverSessions.sessions });
+
+    await cdp.eval('location.reload()');
+    await waitFor(cdp,
+      `(() => { const o = document.querySelectorAll('#versionSelect option'); return o.length >= 2; })()`,
+      90000, '刷新页面后从持久化恢复版本');
+    const restored = await cdp.eval(`(() => ({ options: Array.from(document.querySelectorAll('#versionSelect option')).map(x => x.textContent), badge: (document.querySelector('#persistBadge')||{}).textContent, restoredMsg: Array.from(document.querySelectorAll('#messages .msg.ok')).map(e => e.textContent).filter(t => t.indexOf('恢复') >= 0) }))()`);
+    result.persistence.restore = restored;
+    result.steps.push({ step: '刷新后版本历史与自检报告恢复', ok: restored.options.length >= 2 && restored.restoredMsg.length >= 1, options: restored.options, badge: restored.badge });
+    result.screenshots.push(await shot(cdp, 'persistence.png'));
+
     result.messages = await cdp.eval(`Array.from(document.querySelectorAll('#messages .msg')).map(e => ({kind: e.className, text: e.textContent.slice(0,220)}))`);
     result.pageExceptions = cdp.events.filter((e) => e.method === 'Runtime.exceptionThrown').map((e) => JSON.stringify(e.params).slice(0, 300));
     result.consoleErrors = cdp.events.filter((e) => e.method === 'Log.entryAdded' && e.params.entry.level === 'error').map((e) => e.params.entry.text.slice(0, 300));
