@@ -9,6 +9,7 @@
 |---|---|
 | 在线可测试 Demo | https://wbapp-y5wxetvgn0wc7wvssf372f.app.workbuddy.host/?sharecode=SY54IO7FE7 |
 | GitHub 源码 | https://github.com/13327228383/Atoms-Demo |
+| 笔试文档副本（飞书 / public） | https://vcnbzw1k99ca.feishu.cn/docx/Vv5xd38S4oouoixCeqMc7csznSh |
 
 > 打开在线 Demo 请使用**完整链接（含 `?sharecode=`）**：发布网关依赖该参数放行，裸域名会被判为「链接不完整」。
 
