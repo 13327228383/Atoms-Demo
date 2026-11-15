@@ -32,7 +32,7 @@
 
 - **（必含）你的笔试文档**：本副本「ROOT 全栈岗位笔试——周文波」，权限 public
 - **（必含）已部署的可测试链接（自行部署）**：https://wbapp-y5wxetvgn0wc7wvssf372f.app.workbuddy.host/?sharecode=SY54IO7FE7
-- **（必含）代码链接（GitHub）**：https://github.com/13327228383/atoms-demo （public / MIT）
+- **（必含）代码链接（GitHub）**：https://github.com/13327228383/Atoms-Demo （public / MIT）
 - **（可选）AI coding 工具账单**：本次使用 WorkBuddy / Claude Code 辅助开发；账单未随仓库提交，如需可另附
 
 > 在线链接请完整保留 `?sharecode=`：发布网关依赖该参数放行，裸域名会被判为「链接不完整」。
@@ -79,7 +79,7 @@
 - 移动端真机适配（只做响应式布局，未真机验证）
 - OpenAI 兼容通道实跑（代码实现，本机未持有 Key，**未实测**）
 
-**已知短板**：本地 7B 模型首次生成约 60–90 秒；线上模型生成的 HTML 更完整（约 1 万字符），但两轮完整流程实测约 2 分 40 秒，首屏等待是体验第一瓶颈。云端多轮不保证 v2 与 v1 视觉结构完全一致。
+**已知短板**：本地 7B 模型首次生成约 1 分钟量级；线上模型生成的 HTML 更完整（约 1 万字符），但两轮完整流程为数分钟量级，首屏等待是体验第一瓶颈（时间均为人工观察的量级估计，非结构化指标）。云端多轮不保证 v2 与 v1 视觉结构完全一致。
 
 ## 三、如果继续投入时间：扩展方向与优先级
 
@@ -110,13 +110,15 @@
 
 证据文件（随 GitHub 仓库公开）：`tests/results/e2e_result.json`、`tests/results/online/e2e_result.json`、`tests/results/online/WAF_ROOTCAUSE.md` 及两份 WAF 诊断原始 JSON、探针自测结果、本地与线上真实浏览器截图。修复前的失败记录 `e2e_result_before_waf_fix.json` 也一并保留，不做修饰。
 
+> 证据口径：表内字符数、自检项、页面异常均取自结果 JSON 的结构化字段；耗时为人工观察的量级估计，两份结果 JSON 未含耗时字段（复跑脚本现已自动记录 `durationMs`），不回填历史数字。
+
 复跑：
 
 ```bash
 node server.js
 node tests/e2e_cdp.js
 BASE="https://wbapp-y5wxetvgn0wc7wvssf372f.app.workbuddy.host/?sharecode=SY54IO7FE7" \
-CDP_PORT=9228 RESULTS_SUBDIR=online node tests/e2e_cdp.js
+CDP_PORT=9229 RESULTS_SUBDIR=online node tests/e2e_cdp.js
 ```
 
 **未验证范围（如实标注）**：OpenAI 兼容通道的真实调用、移动端真机、复杂需求下模型输出的稳定性、并发访问表现。这些不宣称已验证。

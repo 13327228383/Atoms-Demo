@@ -8,7 +8,7 @@
 | 交付项 | 链接 |
 |---|---|
 | 在线可测试 Demo | https://wbapp-y5wxetvgn0wc7wvssf372f.app.workbuddy.host/?sharecode=SY54IO7FE7 |
-| GitHub 源码 | https://github.com/13327228383/atoms-demo |
+| GitHub 源码 | https://github.com/13327228383/Atoms-Demo |
 
 > 打开在线 Demo 请使用**完整链接（含 `?sharecode=`）**：发布网关依赖该参数放行，裸域名会被判为「链接不完整」。
 
@@ -21,7 +21,7 @@ node server.js
 # 打开 http://127.0.0.1:8787
 ```
 
-默认使用本机 Ollama 的 `qwen2.5:7b`，**无需注册、无需 API Key**。首次生成在本地 7B 模型上约 60–90 秒，界面会实时显示已生成的字符。
+默认使用本机 Ollama 的 `qwen2.5:7b`，**无需注册、无需 API Key**。首次生成在本地 7B 模型上约 1 分钟量级（人工观察值，随机器与模型波动），界面会实时显示已生成的字符。
 
 ## 模型配置
 
@@ -97,15 +97,17 @@ FEISHU_COPY.md                 可直接粘贴进飞书文档副本的提交稿
 
 ```bash
 # 先启动服务，再开一个带 CDP 的 Chromium（默认复用 9223 端口，脚本可自行拉起）
-node tests/probe_quick.js     # 只验证探针，约 2 秒
-node tests/e2e_cdp.js         # 真实 UI 全流程，含两轮真实模型生成，约 3–5 分钟
+node tests/probe_quick.js     # 只验证探针，秒级
+node tests/e2e_cdp.js         # 真实 UI 全流程，含两轮真实模型生成，数分钟量级
 
 # 针对线上部署复跑（带 sharecode 的完整链接）
 BASE="https://wbapp-y5wxetvgn0wc7wvssf372f.app.workbuddy.host/?sharecode=SY54IO7FE7" \
-CDP_PORT=9224 RESULTS_SUBDIR=online node tests/e2e_cdp.js
+CDP_PORT=9229 RESULTS_SUBDIR=online node tests/e2e_cdp.js
 ```
 
 `e2e_cdp.js` 通过 Chrome DevTools Protocol 驱动真实 Chromium：聚焦输入框 → 键盘输入 → 鼠标点击 → 等待真实模型生成 → 读取自检报告与预览 iframe → 验证代码页与导出控件 → 再走一轮多轮修改。它**不直接调用后端生成接口**，也不依赖 Playwright。证据落在 `tests/results/`。
+
+> 结果 JSON 中生成字符数、自检项、`pageExceptions` / `consoleErrors` / `success` 均为结构化字段；`startedAt` / `durationMs` / `durationHuman` 记录脚本真实墙钟耗时，复跑自动产出。本仓库归档的早期结果生成于该耗时字段加入之前，不含耗时字段，不回填、不补造数字。
 
 ## 公网部署
 

@@ -3,7 +3,7 @@
 /**
  * 零依赖真实浏览器 E2E：通过 Chrome DevTools Protocol 驱动本机 Chromium。
  * 全程模拟真实用户操作（聚焦输入框 → 键盘输入 → 鼠标点击），不直调后端生成接口。
- * 证据：tests/results/e2e_result.json + preview.png / selfcheck.png / iteration.png
+ * 证据：tests/results/e2e_result.json（含 startedAt / durationMs 真实墙钟耗时） + preview.png / selfcheck.png / iteration.png
  *
  * 运行：node tests/e2e_cdp.js        （默认检查 127.0.0.1:8787 的服务与 9223 的 CDP）
  * 可选：BASE=http://... CDP_PORT=9223 GENERATE_TIMEOUT_MS=420000
@@ -21,6 +21,8 @@ const CHROME = process.env.CHROME_PATH || 'C:/Users/Administrator/AppData/Local/
 const TIMEOUT = Number(process.env.GENERATE_TIMEOUT_MS || 420000);
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+// 脚本启动时刻：用于写出真实墙钟耗时，供文档耗时口径复核（不推测、不补造）。
+const RUN_START = Date.now();
 
 async function ensureBrowser() {
   const url = `http://127.0.0.1:${CDP_PORT}/json/version`;
@@ -119,6 +121,7 @@ async function main() {
   fs.mkdirSync(RESULTS, { recursive: true });
   const result = {
     mode: 'real-browser-cdp-ui-flow', base: BASE,
+    startedAt: new Date(RUN_START).toISOString(),
     timestamp: new Date().toISOString(), steps: [], screenshots: []
   };
   let cdp, targetId;
@@ -227,6 +230,10 @@ async function main() {
     if (targetId) { try { await fetch(`http://127.0.0.1:${CDP_PORT}/json/close/${targetId}`); } catch {} }
   }
 
+  // 真实墙钟耗时（脚本启动 -> 写出结果），供文档耗时口径复核。
+  result.durationMs = Date.now() - RUN_START;
+  result.durationHuman = Math.floor(result.durationMs / 60000) + ' 分 '
+    + Math.floor((result.durationMs % 60000) / 1000) + ' 秒';
   fs.writeFileSync(path.join(RESULTS, 'e2e_result.json'), JSON.stringify(result, null, 2), 'utf8');
   console.log(JSON.stringify(result, null, 2).slice(0, 9000));
   console.log('\n证据文件:', path.join(RESULTS, 'e2e_result.json'));

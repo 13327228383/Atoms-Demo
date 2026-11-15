@@ -7,7 +7,7 @@
 | 交付项 | 链接 / 状态 |
 |---|---|
 | 在线可测试 Demo | https://wbapp-y5wxetvgn0wc7wvssf372f.app.workbuddy.host/?sharecode=SY54IO7FE7 |
-| GitHub 源码（public / MIT） | https://github.com/13327228383/atoms-demo |
+| GitHub 源码（public / MIT） | https://github.com/13327228383/Atoms-Demo |
 | 飞书文档副本 | 标题「ROOT 全栈岗位笔试——周文波」，权限 public；可直接粘贴的正文见 `FEISHU_COPY.md` |
 
 > 在线链接请**完整保留 `?sharecode=`**：发布网关依赖该参数放行，裸域名会被判为「链接不完整」。
@@ -76,7 +76,7 @@ WAF 事件也顺带成了工程思维的实证：不是把报错藏起来，而�
 
 ### 已知短板
 
-- 本地 `qwen2.5:7b` 首次生成约 60–90 秒，代码质量一般（能跑但样式与边界处理不精致）。线上 Hy4 生成的 HTML 明显更完整（约 1 万字符 vs 本地约 3 千字符），但两轮完整流程实测约 2 分 40 秒，首屏等待仍是体验第一瓶颈。
+- 本地 `qwen2.5:7b` 首次生成约 1 分钟量级（人工观察值），代码质量一般（能跑但样式与边界处理不精致）。线上 Hy4 生成的 HTML 明显更完整（约 1 万字符 vs 本地约 3 千字符），但两轮完整流程为数分钟量级，首屏等待仍是体验第一瓶颈。本文所有时间描述均为人工观察的量级估计，非结构化指标（口径见第四节）。
 - 云端多轮上下文为结构摘要，不保证 v2 与 v1 的视觉/结构完全一致（见取舍 7）。
 - 云端模型目录由平台提供，会随平台调整；目录为空时如实报错，不硬编码兜底模型。
 
@@ -124,9 +124,11 @@ WAF 事件也顺带成了工程思维的实证：不是把报错藏起来，而�
 | 预览与导出 | iframe `srcdoc` 9900 字符且含完整 HTML；代码页长度一致；下载控件可用 |
 | 多轮修改 | 版本列表出现 v1、v2 |
 | 页面异常 | `pageExceptions=[]`、`consoleErrors=[]` |
-| 完整流程耗时 | 约 2 分 40 秒（两轮真实模型生成 + 两轮自检 + 截图） |
+| 完整流程耗时 | 数分钟量级（两轮真实模型生成 + 两轮自检 + 截图）；人工观察值，结果 JSON 未记录结构化耗时字段 |
 
 > 表中数值取自最终一次完整验收，与 `tests/results/e2e_result.json`、`tests/results/online/e2e_result.json` 一致；模型输出长度每次会有正常波动，不影响结论。
+
+**证据口径（实测事实 / 观察值分开标）**：表中生成字符数、自检项、`pageExceptions` / `consoleErrors`、`success` 等均直接取自两份结果 JSON 的结构化字段，可逐字段复核；**耗时不在其中** —— 这两份 JSON 仅含 `timestamp`，不含任何耗时字段，因此本文所有时间描述都是人工观察的量级估计，不作为可复核的结构化指标。为修掉这个口径缺口，`tests/e2e_cdp.js` 已增加真实墙钟记录 `durationMs` / `durationHuman` / `startedAt`，后续复跑会自动产出可复核耗时；本次已归档的两份历史结果保持原样，不回填、不补造数字。
 
 ### 证据文件
 
@@ -142,12 +144,12 @@ WAF 事件也顺带成了工程思维的实证：不是把报错藏起来，而�
 ```bash
 # 本地
 node server.js
-node tests/probe_quick.js         # 约 2 秒，不调模型
-node tests/e2e_cdp.js             # 约 3–5 分钟，含两轮真实模型生成
+node tests/probe_quick.js         # 秒级，不调模型
+node tests/e2e_cdp.js             # 数分钟量级，含两轮真实模型生成
 
 # 线上（必须使用带 sharecode 的完整链接）
 BASE="https://wbapp-y5wxetvgn0wc7wvssf372f.app.workbuddy.host/?sharecode=SY54IO7FE7" \
-CDP_PORT=9228 RESULTS_SUBDIR=online node tests/e2e_cdp.js
+CDP_PORT=9229 RESULTS_SUBDIR=online node tests/e2e_cdp.js
 ```
 
 ### 未验证范围（如实标注）
@@ -162,7 +164,7 @@ OpenAI 兼容通道的真实调用、移动端真机、复杂需求下模型输�
 
 1. **（必含）笔试文档副本**：在飞书把原文档创建副本，标题改为「ROOT 全栈岗位笔试——周文波」，把 `FEISHU_COPY.md` 的正文粘贴进去，**访问权限设为 public**，检查文档评论。
 2. **（必含）已部署的可测试链接**：https://wbapp-y5wxetvgn0wc7wvssf372f.app.workbuddy.host/?sharecode=SY54IO7FE7
-3. **（必含）GitHub 代码链接**：https://github.com/13327228383/atoms-demo （public，MIT）
+3. **（必含）GitHub 代码链接**：https://github.com/13327228383/Atoms-Demo （public，MIT）
 4. **（可选加分）AI coding 工具账单**：本次使用 WorkBuddy / Claude Code 辅助开发；账单未随仓库提交，如需可另附，不编造金额。
 
 检查无误后，把**飞书文档副本链接**发送给对接的招聘 HR。
