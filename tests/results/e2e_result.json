@@ -1,7 +1,7 @@
 {
   "mode": "real-browser-cdp-ui-flow",
-  "base": "http://127.0.0.1:8787",
-  "timestamp": "2026-11-15T10:35:42.599Z",
+  "base": "http://127.0.0.1:8788",
+  "timestamp": "2026-11-15T11:57:37.995Z",
   "steps": [
     {
       "step": "启动/复用真实 Chromium",
@@ -9,18 +9,18 @@
       "version": "Chrome/151.0.7922.34"
     },
     {
-      "step": "服务健康检查",
+      "step": "前端页面与模型状态",
+      "ok": true,
+      "text": "● qwen2.5:7b 在线"
+    },
+    {
+      "step": "服务健康检查（浏览器同源）",
       "ok": true,
       "response": {
         "status": "ok",
         "provider": "ollama",
         "model": "qwen2.5:7b"
       }
-    },
-    {
-      "step": "前端页面与模型状态",
-      "ok": true,
-      "text": "● qwen2.5:7b 在线"
     },
     {
       "step": "真实键盘输入 + 鼠标点击发起生成",
@@ -30,42 +30,49 @@
     {
       "step": "生成中 11s",
       "ok": true,
-      "stream": "已生成 293 字符…\n…    <title>待办清单</title>\n    <style>\n        bod",
+      "stream": "已生成 381 字符…\n…serif;\n            display: flex;\n            f",
       "msgs": 4,
       "btn": "生成中"
     },
     {
       "step": "生成中 21s",
       "ok": true,
-      "stream": "已生成 558 字符…\n…none; }\n        .delete-btn { float: right; }\n ",
+      "stream": "已生成 710 字符…\n…          padding: 20px;\n            border-rad",
       "msgs": 4,
       "btn": "生成中"
     },
     {
       "step": "生成中 32s",
       "ok": true,
-      "stream": "已生成 941 字符…\n…tton = document.getElementById('add-todo');\n\n  ",
+      "stream": "已生成 1153 字符…\n…fff;\n            border: none;\n            pad",
       "msgs": 4,
       "btn": "生成中"
     },
     {
       "step": "生成中 42s",
       "ok": true,
-      "stream": "已生成 1409 字符…\n…\n            item.textContent = text;\n\n       ",
+      "stream": "已生成 1486 字符…\n…\" placeholder=\"添加新任务\">\n        <button onclick",
       "msgs": 4,
       "btn": "生成中"
     },
     {
       "step": "生成中 53s",
       "ok": true,
-      "stream": "已生成 1924 字符…\n…dos = Array.from(todoList.children).map(item =",
+      "stream": "已生成 2106 字符…\n…  function renderTasks() {\n            const u",
       "msgs": 4,
       "btn": "生成中"
     },
     {
-      "step": "生成中 63s",
+      "step": "生成中 64s",
       "ok": true,
-      "stream": "已生成 2400 字符…\n…doList.addEventListener('change', (e) => {\n   ",
+      "stream": "已生成 2560 字符…\n…=\"toggleTaskCompletion(${index})\">\n           ",
+      "msgs": 4,
+      "btn": "生成中"
+    },
+    {
+      "step": "生成中 74s",
+      "ok": true,
+      "stream": "已生成 3131 字符…\n…const tasks = JSON.parse(localStorage.getItem(",
       "msgs": 4,
       "btn": "生成中"
     },
@@ -89,14 +96,14 @@
     {
       "step": "预览 iframe 注入生成的应用",
       "ok": true,
-      "srcdocLength": 2631,
+      "srcdocLength": 3238,
       "hasHtml": true,
       "visible": true
     },
     {
       "step": "代码页与导出控件",
       "ok": true,
-      "length": 2631,
+      "length": 3238,
       "hasHtml": true,
       "downloadEnabled": true
     },
@@ -120,7 +127,7 @@
     "iteration.png"
   ],
   "browser": {
-    "started": false,
+    "started": true,
     "version": "Chrome/151.0.7922.34"
   },
   "selfcheck": {
@@ -133,7 +140,7 @@
       {
         "status": "pass",
         "title": "DOM 实际渲染",
-        "detail": "可见文本 8 字符，DOM 节点 5 个（初始态只要求有实际渲染内容，不用文本长度卡阈值）"
+        "detail": "可见文本 8 字符，DOM 节点 6 个（初始态只要求有实际渲染内容，不用文本长度卡阈值）"
       },
       {
         "status": "pass",
@@ -151,16 +158,16 @@
         "detail": "点击 1 个按钮，1 次引发可见 DOM 变化（点击前已给空文本框填入测试值「自检」，共填 1 次）；明细：添加→有变化"
       }
     ],
-    "meta": "\n        可见文本 8 字符 · DOM 5 节点 ·\n        控件 2 个 ·\n        真实点击 1 次（1 次有可见变化）\n      ",
+    "meta": "\n        可见文本 8 字符 · DOM 6 节点 ·\n        控件 2 个 ·\n        真实点击 1 次（1 次有可见变化）\n      ",
     "dot": "dot ok"
   },
   "preview": {
-    "srcdocLength": 2631,
+    "srcdocLength": 3238,
     "hasHtml": true,
     "visible": true
   },
   "code": {
-    "length": 2631,
+    "length": 3238,
     "hasHtml": true,
     "downloadEnabled": true
   },
@@ -183,11 +190,11 @@
     },
     {
       "kind": "msg status",
-      "text": "生成完成 · qwen2.5:7b · 2643 字符"
+      "text": "生成完成 · qwen2.5:7b · 3250 字符"
     },
     {
       "kind": "msg agent",
-      "text": "已生成 v1（2631 字符单文件 HTML），正在浏览器沙箱内自动冒烟自检…"
+      "text": "已生成 v1（3238 字符单文件 HTML），正在浏览器沙箱内自动冒烟自检…"
     },
     {
       "kind": "msg ok",
@@ -199,11 +206,11 @@
     },
     {
       "kind": "msg status",
-      "text": "生成完成 · qwen2.5:7b · 2944 字符"
+      "text": "生成完成 · qwen2.5:7b · 3601 字符"
     },
     {
       "kind": "msg agent",
-      "text": "已生成 v2（2932 字符单文件 HTML），正在浏览器沙箱内自动冒烟自检…"
+      "text": "已生成 v2（3589 字符单文件 HTML），正在浏览器沙箱内自动冒烟自检…"
     },
     {
       "kind": "msg ok",

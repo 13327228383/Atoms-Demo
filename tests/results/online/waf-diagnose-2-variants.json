@@ -1,0 +1,59 @@
+{
+  "timestamp": "2026-11-15T11:44:12.025Z",
+  "variants": [
+    {
+      "label": "V1_fixed_prompt_第一轮",
+      "ms": 45001,
+      "ok": false,
+      "outLen": 0,
+      "outHead": "",
+      "isWaf": false,
+      "errHead": "TIMEOUT_45s"
+    },
+    {
+      "label": "V2_fixed_prompt_多轮带完整HTML",
+      "ms": 60,
+      "ok": false,
+      "outLen": 0,
+      "outHead": "",
+      "isWaf": true,
+      "errHead": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\" /><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scala"
+    },
+    {
+      "label": "V3_原始prompt_对照",
+      "ms": 56,
+      "ok": false,
+      "outLen": 0,
+      "outHead": "",
+      "isWaf": true,
+      "errHead": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\" /><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scala"
+    },
+    {
+      "label": "V4_极小system_user含HTML",
+      "ms": 54,
+      "ok": false,
+      "outLen": 0,
+      "outHead": "",
+      "isWaf": true,
+      "errHead": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\" /><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scala"
+    }
+  ],
+  "network": [
+    {
+      "status": 200,
+      "mime": "text/event-stream"
+    },
+    {
+      "status": 403,
+      "mime": "text/html"
+    },
+    {
+      "status": 403,
+      "mime": "text/html"
+    },
+    {
+      "status": 403,
+      "mime": "text/html"
+    }
+  ]
+}

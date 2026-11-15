@@ -1,0 +1,223 @@
+{
+  "mode": "real-browser-cdp-ui-flow",
+  "base": "https://wbapp-y5wxetvgn0wc7wvssf372f.app.workbuddy.host/?sharecode=SY54IO7FE7",
+  "timestamp": "2026-11-15T11:58:35.130Z",
+  "steps": [
+    {
+      "step": "启动/复用真实 Chromium",
+      "ok": true,
+      "version": "Chrome/151.0.7922.34"
+    },
+    {
+      "step": "前端页面与模型状态",
+      "ok": true,
+      "text": "● Hy4 在线"
+    },
+    {
+      "step": "服务健康检查（浏览器同源）",
+      "ok": true,
+      "response": {
+        "status": "ok",
+        "provider": "cloud",
+        "model": "cloud-sdk (浏览器端免密钥模型)"
+      }
+    },
+    {
+      "step": "真实键盘输入 + 鼠标点击发起生成",
+      "ok": true,
+      "idea": "做个待办清单，能添加任务、勾选完成、删除任务"
+    },
+    {
+      "step": "生成中 11s",
+      "ok": true,
+      "stream": "",
+      "msgs": 4,
+      "btn": "生成中"
+    },
+    {
+      "step": "生成中 21s",
+      "ok": true,
+      "stream": "",
+      "msgs": 4,
+      "btn": "生成中"
+    },
+    {
+      "step": "生成中 32s",
+      "ok": true,
+      "stream": "",
+      "msgs": 4,
+      "btn": "生成中"
+    },
+    {
+      "step": "生成中 42s",
+      "ok": true,
+      "stream": "",
+      "msgs": 4,
+      "btn": "生成中"
+    },
+    {
+      "step": "生成中 53s",
+      "ok": true,
+      "stream": "已生成 2761 字符…\n… var(--primary); }\n  .filter.active {\n    back",
+      "msgs": 4,
+      "btn": "生成中"
+    },
+    {
+      "step": "生成中 63s",
+      "ok": true,
+      "stream": "已生成 6306 字符…\n…d('show');\n    clearTimeout(hintTimer);\n    hi",
+      "msgs": 4,
+      "btn": "生成中"
+    },
+    {
+      "step": "生成中 74s",
+      "ok": true,
+      "stream": "",
+      "msgs": 4,
+      "btn": "生成"
+    },
+    {
+      "step": "自动冒烟自检出报告",
+      "ok": true,
+      "verdict": "自检通过"
+    },
+    {
+      "step": "自检检查项数量",
+      "ok": true,
+      "count": 5,
+      "titles": [
+        "JavaScript 运行时",
+        "DOM 实际渲染",
+        "可交互控件",
+        "离线自包含",
+        "真实点击探测"
+      ]
+    },
+    {
+      "step": "预览 iframe 注入生成的应用",
+      "ok": true,
+      "srcdocLength": 9900,
+      "hasHtml": true,
+      "visible": true
+    },
+    {
+      "step": "代码页与导出控件",
+      "ok": true,
+      "length": 9900,
+      "hasHtml": true,
+      "downloadEnabled": true
+    },
+    {
+      "step": "多轮对话修改产生新版本",
+      "ok": true,
+      "versions": [
+        "v1 · 做个待办清单，能添加任务",
+        "v2 · 把标题改成「我的待办」，"
+      ]
+    },
+    {
+      "step": "v2 自动自检出报告",
+      "ok": true,
+      "verdict": "自检通过"
+    }
+  ],
+  "screenshots": [
+    "preview.png",
+    "selfcheck.png",
+    "iteration.png"
+  ],
+  "browser": {
+    "started": true,
+    "version": "Chrome/151.0.7922.34"
+  },
+  "selfcheck": {
+    "checks": [
+      {
+        "status": "pass",
+        "title": "JavaScript 运行时",
+        "detail": "未捕获异常、console.error 与未处理的 Promise 拒绝均为 0"
+      },
+      {
+        "status": "pass",
+        "title": "DOM 实际渲染",
+        "detail": "可见文本 48 字符，DOM 节点 16 个（初始态只要求有实际渲染内容，不用文本长度卡阈值）"
+      },
+      {
+        "status": "pass",
+        "title": "可交互控件",
+        "detail": "检出 6 个控件（button / input / select / textarea / role=button）"
+      },
+      {
+        "status": "pass",
+        "title": "离线自包含",
+        "detail": "无外链脚本、样式或图片，单文件可直接打开"
+      },
+      {
+        "status": "pass",
+        "title": "真实点击探测",
+        "detail": "点击 3 个按钮，1 次引发可见 DOM 变化（点击前已给空文本框填入测试值「自检」，共填 2 次）；明细：添加→有变化、全部→无变化、未完成→无变化"
+      }
+    ],
+    "meta": "\n        可见文本 48 字符 · DOM 16 节点 ·\n        控件 6 个 ·\n        真实点击 3 次（1 次有可见变化）\n      ",
+    "dot": "dot ok"
+  },
+  "preview": {
+    "srcdocLength": 9900,
+    "hasHtml": true,
+    "visible": true
+  },
+  "code": {
+    "length": 9900,
+    "hasHtml": true,
+    "downloadEnabled": true
+  },
+  "iteration": {
+    "idea": "把标题改成「我的待办」，并加上未完成任务计数",
+    "versions": [
+      "v1 · 做个待办清单，能添加任务",
+      "v2 · 把标题改成「我的待办」，"
+    ],
+    "verdict": "自检通过"
+  },
+  "messages": [
+    {
+      "kind": "msg agent",
+      "text": "欢迎。描述一个你想要的应用，我会生成一个完整可运行的单文件网页应用，在右侧实时预览，并自动做浏览器冒烟自检。"
+    },
+    {
+      "kind": "msg user",
+      "text": "做个待办清单，能添加任务、勾选完成、删除任务"
+    },
+    {
+      "kind": "msg status",
+      "text": "生成完成 · Hy4 · 9912 字符"
+    },
+    {
+      "kind": "msg agent",
+      "text": "已生成 v1（9900 字符单文件 HTML），正在浏览器沙箱内自动冒烟自检…"
+    },
+    {
+      "kind": "msg ok",
+      "text": "v1 自检通过：5 项检查，3 次真实点击探测。可继续用对话修改，或下载 HTML。"
+    },
+    {
+      "kind": "msg user",
+      "text": "把标题改成「我的待办」，并加上未完成任务计数"
+    },
+    {
+      "kind": "msg status",
+      "text": "生成完成 · Hy4 · 11837 字符"
+    },
+    {
+      "kind": "msg agent",
+      "text": "已生成 v2（11825 字符单文件 HTML），正在浏览器沙箱内自动冒烟自检…"
+    },
+    {
+      "kind": "msg ok",
+      "text": "v2 自检通过：5 项检查，3 次真实点击探测。可继续用对话修改，或下载 HTML。"
+    }
+  ],
+  "pageExceptions": [],
+  "consoleErrors": [],
+  "success": true
+}

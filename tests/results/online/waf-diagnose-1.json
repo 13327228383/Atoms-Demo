@@ -1,0 +1,233 @@
+{
+  "base": "https://wbapp-y5wxetvgn0wc7wvssf372f.app.workbuddy.host/?sharecode=SY54IO7FE7",
+  "timestamp": "2026-11-15T11:41:38.632Z",
+  "badge": "● Hy4 在线",
+  "diag": {
+    "config": {
+      "endpoint": "https://wbapp-y5wxetvgn0wc7wvssf372f.app.workbuddy.host",
+      "hasKey": true
+    },
+    "sdkLoaded": true,
+    "models": [
+      {
+        "id": "auto",
+        "name": "Auto",
+        "enabled": true
+      },
+      {
+        "id": "hy4free",
+        "name": "Hy4",
+        "enabled": true
+      },
+      {
+        "id": "hy4std",
+        "name": "Hy4",
+        "enabled": true
+      },
+      {
+        "id": "deepseek-v4.1-flash",
+        "name": "DeepSeek-V4.1-Flash",
+        "enabled": true
+      },
+      {
+        "id": "glm-5.3-flash",
+        "name": "GLM-5.3-Flash",
+        "enabled": true
+      },
+      {
+        "id": "hy3",
+        "name": "Hy3",
+        "enabled": true
+      },
+      {
+        "id": "step-5-preview",
+        "name": "Step-5-Preview",
+        "enabled": true
+      },
+      {
+        "id": "space-bunny",
+        "name": "Space-Bunny",
+        "enabled": true
+      },
+      {
+        "id": "deepseek-v4-pro",
+        "name": "DeepSeek-V4-Pro",
+        "enabled": true
+      },
+      {
+        "id": "glm-5.3",
+        "name": "GLM-5.3",
+        "enabled": true
+      },
+      {
+        "id": "hy3-x",
+        "name": "Hy3",
+        "enabled": true
+      },
+      {
+        "id": "glm-5.2",
+        "name": "GLM-5.2",
+        "enabled": true
+      },
+      {
+        "id": "kimi-k2.8-preview",
+        "name": "Kimi-K2.8-Preview",
+        "enabled": true
+      },
+      {
+        "id": "kimi-k2.5",
+        "name": "Kimi-K2.5",
+        "enabled": true
+      },
+      {
+        "id": "kimi-k3-1",
+        "name": "Kimi-K3",
+        "enabled": true
+      },
+      {
+        "id": "kimi-k3.1-pro",
+        "name": "Kimi-K3.1-Pro",
+        "enabled": true
+      },
+      {
+        "id": "minimax-m3.1-flash",
+        "name": "MiniMax-M3.1-Flash",
+        "enabled": true
+      },
+      {
+        "id": "mimo-v2.6-pro",
+        "name": "Xiaomi MiMo-V2.6-Pro",
+        "enabled": true
+      },
+      {
+        "id": "hunyuan-image-alpha",
+        "name": "Hunyuan Image Alpha",
+        "enabled": true
+      },
+      {
+        "id": "hunyuan-image-alpha-edit",
+        "name": "Hunyuan Image Alpha Edit",
+        "enabled": true
+      },
+      {
+        "id": "fast-model",
+        "name": "快速",
+        "enabled": true
+      },
+      {
+        "id": "balanced-model",
+        "name": "均衡",
+        "enabled": true
+      },
+      {
+        "id": "deep-model",
+        "name": "极致",
+        "enabled": true
+      },
+      {
+        "id": "hy4-preview-x",
+        "name": "Hy4 preview",
+        "enabled": true
+      },
+      {
+        "id": "default",
+        "name": "Default",
+        "enabled": true
+      },
+      {
+        "id": "glm-5.0",
+        "name": "GLM-5.0",
+        "enabled": true
+      },
+      {
+        "id": "glm-4.7",
+        "name": "GLM-4.7",
+        "enabled": true
+      },
+      {
+        "id": "glm-4.6",
+        "name": "GLM-4.6",
+        "enabled": true
+      },
+      {
+        "id": "glm-4.6v",
+        "name": "GLM-4.6V",
+        "enabled": true
+      },
+      {
+        "id": "minimax-m2.5",
+        "name": "MiniMax-M2.5",
+        "enabled": true
+      },
+      {
+        "id": "kimi-k2-thinking",
+        "name": "Kimi-K2-Thinking",
+        "enabled": true
+      },
+      {
+        "id": "deepseek-v4-flash",
+        "name": "Deepseek-V4-Flash",
+        "enabled": true
+      },
+      {
+        "id": "deepseek-v3-2-volc",
+        "name": "DeepSeek-V3.2",
+        "enabled": true
+      },
+      {
+        "id": "hunyuan-2.0-thinking",
+        "name": "Hunyuan-2.0-Thinking",
+        "enabled": true
+      },
+      {
+        "id": "hunyuan-chat",
+        "name": "Hunyuan-Turbos",
+        "enabled": true
+      },
+      {
+        "id": "kling-video-v3",
+        "name": "Kling-Video-V3",
+        "enabled": true
+      },
+      {
+        "id": "minimax-video-h3",
+        "name": "MiniMax-H3",
+        "enabled": true
+      }
+    ],
+    "A": {
+      "label": "A_minimal_prompt",
+      "ok": true,
+      "v": "Hi there! How can I help you today?"
+    },
+    "realPromptLength": 701,
+    "B": {
+      "label": "B_real_prompt",
+      "ok": false,
+      "err": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\" /><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\" /><title>WAF拦截页面</title><link rel=\"stylesheet\" text=\"text/css\" href=\"https://domain-config-1256704386.cos.accelerate.myqcloud.com/block-pages/403/main.css\" /><script type=\"text/javascript\" src=\"https://domain-config-1256704386.cos.accelerate.myqcloud.com/block-pages/403/main.js\"></script></head><script> function submitWafFeedback() { var uuid = document.getElementById(\"uuid\").innerHTML; window.location.href = \"https://api.waf.qq.com/waf-attack-feedback/\" + uuid; } </script><body><div class=\"wrapper\"><div class=\"body\"><div class=\"top-block\"><img class=\"error-icon\" src=\"https://domain-config-1256704386.cos.accelerate.myqcloud.com/block-pages/static/403-icon.png\" alt=\"403\" /><div><div class=\"title-wrapper\"><p class=\"title\">您的请求已中断</p></div><p class=\"desc\">您提交的请求可能对网站造成威胁，无法访问</p></div></div><div class=\"content-block\"><div class=\"content-item\"><p class=\"title\">可能原因</p><p class=\"desc\">Web应用防护服务检测您当前访问存在Web安全风险或访问不合规</p><img class=\"link-img\" style=\"margin-top: 20px; margin-bottom: 32px\" src=\"https://domain-config-1256704386.cos.accelerate.myqcloud.com/block-pages/static/403-link.svg\" alt=\"\" /></div><div class=\"mobile-link-block\"><div class=\"link-item\"><div class=\"left\"><p class=\"title\">Client</p><p class=\"desc\">浏览器正常</p></div><img src=\"https://domain-config-1256704386.cos.accelerate.myqcloud.com/block-pages/static/success-status.svg\" alt=\"\" /></div><div class=\"link-item-divider\"></div><div class=\"link-item\"><div class=\"left\"><p class=\"title\">腾讯云WAF</p><p class=\"desc\">访问拦截</p></div><img src=\"https://domain-config-1256704386.cos.accelerate.myqcloud.com/block-pages/static/error-status.svg\" alt=\"\" /></div><div class=\"link-item-divider\"></div><div class=\"link-item\"><div class=\"left\"><p class=\"title\">源站服务器</p><p class=\"desc\">无法访问</p></div><img src=\"https://domain-config-1256704386.cos.accelerate.myqcloud.com/block-pages/static/check-status.svg\" alt=\"\" /></div></div><div class=\"content-item\"><p class=\"title\">您可以做什么？</p><p class=\"desc\">如有疑问，请点击提交反馈或联系网站安全运维中心反馈请求UUID</p><p class=\"uuid-wrapper\"> 请求UUID：<span id=\"uuid\"> 1f80dae3-8baf-4433-947d-801adfa2056b </span><img class=\"copy-icon\" onclick=\"copyToClipboard()\" src=\"https://domain-config-1256704386.cos.accelerate.myqcloud.com/block-pages/static/copy.svg\" alt=\"\" /></p></div><div class=\"submit-btn\" onclick=\"submitWafFeedback()\">提交反馈</div></div></div></div></body></html>"
+    }
+  },
+  "network": [
+    {
+      "type": "Network.responseReceived",
+      "url": "https://wbapp-y5wxetvgn0wc7wvssf372f.app.workbuddy.host/.cloud/llm/models",
+      "status": 200,
+      "mime": "application/json",
+      "error": null
+    },
+    {
+      "type": "Network.responseReceived",
+      "url": "https://wbapp-y5wxetvgn0wc7wvssf372f.app.workbuddy.host/.cloud/llm/chat/completions",
+      "status": 200,
+      "mime": "text/event-stream",
+      "error": null
+    },
+    {
+      "type": "Network.responseReceived",
+      "url": "https://wbapp-y5wxetvgn0wc7wvssf372f.app.workbuddy.host/.cloud/llm/chat/completions",
+      "status": 403,
+      "mime": "text/html",
+      "error": null
+    }
+  ]
+}

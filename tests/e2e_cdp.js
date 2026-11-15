@@ -13,8 +13,9 @@ const path = require('path');
 const { spawn } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..');
-const RESULTS = path.join(ROOT, 'tests', 'results');
+const RESULTS = path.join(ROOT, 'tests', 'results', process.env.RESULTS_SUBDIR || '');
 const BASE = process.env.BASE || 'http://127.0.0.1:8787';
+const BASE_ORIGIN = new URL(BASE).origin;
 const CDP_PORT = Number(process.env.CDP_PORT || 9223);
 const CHROME = process.env.CHROME_PATH || 'C:/Users/Administrator/AppData/Local/ms-playwright/chromium-1234/chrome-win64/chrome.exe';
 const TIMEOUT = Number(process.env.GENERATE_TIMEOUT_MS || 420000);
@@ -27,7 +28,7 @@ async function ensureBrowser() {
   const child = spawn(CHROME, [
     '--headless=new', '--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage',
     `--remote-debugging-port=${CDP_PORT}`,
-    `--user-data-dir=${path.join(ROOT, 'tests', '.cdp-profile')}`,
+    `--user-data-dir=${path.join(ROOT, 'tests', '.cdp-profile-' + CDP_PORT)}`,
     'about:blank'
   ], { detached: true, stdio: 'ignore' });
   child.unref();
@@ -90,10 +91,16 @@ async function realClick(cdp, selector) {
 
 async function waitFor(cdp, expression, timeoutMs, label, onTick) {
   const start = Date.now();
+  let lastErr = null;
   for (;;) {
-    const v = await cdp.eval(expression);
+    let v = false;
+    // 页面导航/挂载尚未完成时 eval 可能抛 TypeError（例如 #modelBadge 还是 null）。
+    // 这是"还没就绪"，不是失败：记录后继续轮询，超时时把最后一次异常一并带出。
+    try { v = await cdp.eval(expression); } catch (e) { lastErr = e.message; }
     if (v) return v;
-    if (Date.now() - start > timeoutMs) throw new Error('等待超时: ' + label);
+    if (Date.now() - start > timeoutMs) {
+      throw new Error('等待超时: ' + label + (lastErr ? ' | 最后一次异常: ' + lastErr.slice(0, 240) : ''));
+    }
     if (onTick) await onTick(Math.round((Date.now() - start) / 1000));
     await sleep(1500);
   }
@@ -120,9 +127,6 @@ async function main() {
     result.browser = browser;
     result.steps.push({ step: '启动/复用真实 Chromium', ok: true, version: browser.version });
 
-    const health = await (await fetch(BASE + '/health')).json();
-    result.steps.push({ step: '服务健康检查', ok: health.status === 'ok', response: health });
-
     const t = await (await fetch(`http://127.0.0.1:${CDP_PORT}/json/new?${encodeURIComponent(BASE)}`, { method: 'PUT' })).json();
     targetId = t.id;
     cdp = await CDP.connect(t.webSocketDebuggerUrl);
@@ -132,21 +136,29 @@ async function main() {
     await cdp.send('Network.enable');
     await cdp.send('Emulation.setDeviceMetricsOverride', { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false });
 
-    // 等模型状态探测真正返回，避免把"检测模型中…"这个中间态误判成失败
+    // 等模型状态探测真正返回，避免把"检测模型中…"这个中间态误判成失败。
+    // 表达式做 null 防御：DOM 未挂载时返回 false 而不是抛 TypeError（线上首屏比本地慢）。
     await waitFor(cdp,
-      'document.readyState === "complete" && /在线|离线|配置读取失败/.test(document.querySelector("#modelBadge").textContent)',
-      30000, '首页与模型状态就绪');
+      `(() => { const e = document.querySelector('#modelBadge'); return document.readyState === 'complete' && !!e && /在线|离线|配置读取失败|不可用/.test(e.textContent); })()`,
+      60000, '首页与模型状态就绪');
     const badge = await cdp.eval('document.querySelector("#modelBadge").textContent');
     result.steps.push({ step: '前端页面与模型状态', ok: /在线/.test(badge), text: badge });
+
+    // 健康检查放在页面导航完成后的浏览器同源上下文里：网关靠 sharecode/cookie 放行，
+    // 因此把当前页面 query（sharecode）原样带上，避免裸 /health 被判为"链接不完整"。
+    const health = await cdp.eval(`fetch(new URL('/health', location.href).href + (location.search || '')).then(r => r.json())`);
+    result.steps.push({ step: '服务健康检查（浏览器同源）', ok: Boolean(health && health.status === 'ok'), response: health });
 
     const idea = '做个待办清单，能添加任务、勾选完成、删除任务';
     await realType(cdp, '#idea', idea);
     await realClick(cdp, '#sendBtn');
     result.steps.push({ step: '真实键盘输入 + 鼠标点击发起生成', ok: true, idea });
 
+    // 生成阶段若已真实失败（例如上游返回错误页），立刻判定失败，不要空等超时。
+    const verdictOrError = `(() => { const err = document.querySelector('#messages .msg.error'); if (err) return 'ERROR:' + err.textContent.slice(0,600); const e = document.querySelector('#checkView .verdict'); return e ? e.textContent.trim() : false; })()`;
     let lastTick = 0;
     const verdict = await waitFor(cdp,
-      `(() => { const e = document.querySelector('#checkView .verdict'); return e ? e.textContent.trim() : false; })()`,
+      verdictOrError,
       TIMEOUT, '模型生成与自动自检',
       async (sec) => {
         if (sec - lastTick >= 10) {
@@ -155,6 +167,7 @@ async function main() {
           result.steps.push({ step: `生成中 ${sec}s`, ok: true, ...s });
         }
       });
+    if (String(verdict).startsWith('ERROR:')) throw new Error('生成阶段真实失败：' + String(verdict).slice(6));
     result.steps.push({ step: '自动冒烟自检出报告', ok: Boolean(verdict), verdict });
 
     const report = await cdp.eval(`(() => ({
@@ -191,9 +204,8 @@ async function main() {
     result.steps.push({ step: '多轮对话修改产生新版本', ok: versions.length >= 2, versions });
 
     // 等第二版也跑完自动自检，避免证据停在"自检中"
-    const verdict2 = await waitFor(cdp,
-      `(() => { const e = document.querySelector('#checkView .verdict'); return e ? e.textContent.trim() : false; })()`,
-      TIMEOUT, 'v2 自动冒烟自检');
+    const verdict2 = await waitFor(cdp, verdictOrError, TIMEOUT, 'v2 自动冒烟自检');
+    if (String(verdict2).startsWith('ERROR:')) throw new Error('v2 生成阶段真实失败：' + String(verdict2).slice(6));
     result.iteration.verdict = verdict2;
     result.steps.push({ step: 'v2 自动自检出报告', ok: Boolean(verdict2), verdict: verdict2 });
     await cdp.eval('document.querySelector(\'.tab[data-tab="check"]\').click()');

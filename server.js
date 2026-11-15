@@ -91,6 +91,12 @@ async function handleGenerate(req, res) {
   let payload;
   try { payload = await readBody(req); } catch (e) { return sendJson(res, 400, { error: e.message }); }
 
+  if (PROVIDER === 'cloud') {
+    return sendJson(res, 400, {
+      error: '当前为云端免密钥模式：模型由浏览器端 SDK 直接调用，服务端不代理（云服务禁止 BFF 转发）。请在页面内操作。'
+    });
+  }
+
   if (!payload.idea || !String(payload.idea).trim()) {
     return sendJson(res, 400, { error: '缺少 idea' });
   }
@@ -147,6 +153,15 @@ async function handleGenerate(req, res) {
 }
 
 async function handleConfig(res) {
+  if (PROVIDER === 'cloud') {
+    return sendJson(res, 200, {
+      provider: 'cloud',
+      model: '云端免密钥模型（浏览器端 SDK 自动选型）',
+      modelOnline: true,
+      availableModels: [],
+      hasApiKey: false
+    });
+  }
   const probe = await probeModels(config, PROVIDER);
   sendJson(res, 200, {
     provider: PROVIDER,
@@ -162,7 +177,10 @@ const server = http.createServer((req, res) => {
   const p = url.pathname;
 
   if (req.method === 'GET' && p === '/health') {
-    return sendJson(res, 200, { status: 'ok', provider: PROVIDER, model: PROVIDER === 'ollama' ? config.ollamaModel : config.openaiModel });
+    const modelLabel = PROVIDER === 'cloud'
+      ? 'cloud-sdk (浏览器端免密钥模型)'
+      : (PROVIDER === 'ollama' ? config.ollamaModel : config.openaiModel);
+    return sendJson(res, 200, { status: 'ok', provider: PROVIDER, model: modelLabel });
   }
   if (req.method === 'GET' && p === '/api/config') return handleConfig(res);
   if (req.method === 'POST' && p === '/api/generate') return handleGenerate(req, res);

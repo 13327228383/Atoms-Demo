@@ -1,0 +1,316 @@
+{
+  "mode": "real-browser-cdp-ui-flow",
+  "base": "https://wbapp-y5wxetvgn0wc7wvssf372f.app.workbuddy.host/?sharecode=SY54IO7FE7",
+  "timestamp": "2026-11-15T11:32:47.030Z",
+  "steps": [
+    {
+      "step": "启动/复用真实 Chromium",
+      "ok": true,
+      "version": "Chrome/151.0.7922.34"
+    },
+    {
+      "step": "前端页面与模型状态",
+      "ok": true,
+      "text": "● Hy4 在线"
+    },
+    {
+      "step": "服务健康检查（浏览器同源）",
+      "ok": true,
+      "response": {
+        "status": "ok",
+        "provider": "cloud",
+        "model": "gpt-4o-mini"
+      }
+    },
+    {
+      "step": "真实键盘输入 + 鼠标点击发起生成",
+      "ok": true,
+      "idea": "做个待办清单，能添加任务、勾选完成、删除任务"
+    },
+    {
+      "step": "生成中 11s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 21s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 32s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 42s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 53s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 63s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 74s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 85s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 95s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 106s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 116s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 127s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 137s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 148s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 158s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 168s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 178s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 189s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 199s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 210s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 220s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 231s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 242s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 252s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 263s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 273s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 284s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 294s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 305s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 316s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 326s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 337s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 347s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 358s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 368s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 379s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 390s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 400s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    },
+    {
+      "step": "生成中 411s",
+      "ok": true,
+      "stream": "",
+      "msgs": 3,
+      "btn": "生成"
+    }
+  ],
+  "screenshots": [],
+  "browser": {
+    "started": true,
+    "version": "Chrome/151.0.7922.34"
+  },
+  "success": false,
+  "error": "等待超时: 模型生成与自动自检",
+  "messages": [
+    "欢迎。描述一个你想要的应用，我会生成一个完整可运行的单文件网页应用，在右侧实时预览，并自动做浏览器冒烟自检。",
+    "做个待办清单，能添加任务、勾选完成、删除任务",
+    "生成失败：<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\" /><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\" /><title>WAF拦截页面</title><li"
+  ]
+}

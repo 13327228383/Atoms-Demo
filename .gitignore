@@ -3,5 +3,7 @@
 node_modules/
 *.log
 tests/.cdp-profile/
+tests/.cdp-profile-*/
+tests/results/tmp/
 .DS_Store
 Thumbs.db
