@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atoms Demo · 说一句话，让 Agent 把应用造出来</title>
+<link rel="stylesheet" href="/app.css">
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <span class="mark" aria-hidden="true"></span>
+      <div>
+        <h1>Atoms Demo</h1>
+        <p>说一句话，让 Agent 把应用造出来</p>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <span id="modelBadge" class="badge">检测模型中…</span>
+      <button id="newBtn" class="btn ghost" type="button">新建</button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <section class="chat">
+      <div class="chat-head">
+        <span>对话</span>
+        <span class="hint">生成 → 自检 → 迭代</span>
+      </div>
+      <div id="messages" class="messages"></div>
+      <div id="suggestions" class="suggestions">
+        <button class="chip" type="button">做个待办清单，能添加、勾选、筛选和删除</button>
+        <button class="chip" type="button">做个记账本，能记收支并统计结余</button>
+        <button class="chip" type="button">做个番茄钟，能计时和切换任务</button>
+      </div>
+      <div class="composer">
+        <textarea id="idea" rows="2" placeholder="描述你想要的应用，例如：做个待办清单…"></textarea>
+        <button id="sendBtn" class="btn primary" type="button">生成</button>
+      </div>
+      <div class="composer-foot">Enter 发送 · Shift + Enter 换行 · 全程无需注册</div>
+    </section>
+
+    <section class="stage">
+      <div class="tabs">
+        <div class="tab-group">
+          <button class="tab active" data-tab="preview" type="button">预览</button>
+          <button class="tab" data-tab="code" type="button">代码</button>
+          <button class="tab" data-tab="check" type="button">自检报告 <span id="checkDot" class="dot"></span></button>
+        </div>
+        <div class="stage-tools">
+          <select id="versionSelect" class="version-select" aria-label="版本历史" disabled></select>
+          <button id="refreshBtn" class="btn ghost sm" type="button" disabled>刷新</button>
+          <button id="downloadBtn" class="btn ghost sm" type="button" disabled>下载 HTML</button>
+          <button id="copyBtn" class="btn ghost sm" type="button" disabled>复制代码</button>
+        </div>
+      </div>
+
+      <div id="panel-preview" class="panel active">
+        <div id="empty" class="empty">
+          <div class="empty-icon" aria-hidden="true"></div>
+          <h2>这里会实时显示生成的应用</h2>
+          <p>左侧描述你的想法，Agent 会输出一个完整可运行的单文件网页应用，<br>并自动做一次浏览器冒烟自检。</p>
+        </div>
+        <div id="previewWrap" class="preview-wrap hidden">
+          <iframe id="preview" sandbox="allow-scripts" title="生成的应用预览"></iframe>
+        </div>
+      </div>
+
+      <div id="panel-code" class="panel">
+        <pre id="codeView">// 生成后可在此查看完整源码，并一键下载</pre>
+      </div>
+
+      <div id="panel-check" class="panel">
+        <div id="checkView" class="check-empty">尚未运行自检。生成完成后会自动执行。</div>
+      </div>
+    </section>
+  </main>
+</div>
+<script src="/app.js"></script>
+</body>
+</html>

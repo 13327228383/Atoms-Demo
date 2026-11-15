@@ -1,0 +1,75 @@
+{
+  "timestamp": "2026-11-15T10:26:41.691Z",
+  "sample": "C:/tmp/atoms_first.html",
+  "sampleBytes": 2940,
+  "probe": {
+    "token": "quick-token",
+    "verdict": "pass",
+    "checks": [
+      {
+        "name": "JavaScript 运行时",
+        "status": "pass",
+        "detail": "未捕获异常、console.error 与未处理的 Promise 拒绝均为 0"
+      },
+      {
+        "name": "DOM 实际渲染",
+        "status": "pass",
+        "detail": "可见文本 8 字符，DOM 节点 5 个（初始态只要求有实际渲染内容，不用文本长度卡阈值）"
+      },
+      {
+        "name": "可交互控件",
+        "status": "pass",
+        "detail": "检出 2 个控件（button / input / select / textarea / role=button）"
+      },
+      {
+        "name": "离线自包含",
+        "status": "pass",
+        "detail": "无外链脚本、样式或图片，单文件可直接打开"
+      },
+      {
+        "name": "真实点击探测",
+        "status": "pass",
+        "detail": "点击 1 个按钮，1 次引发可见 DOM 变化（点击前已给空文本框填入测试值「自检」，共填 1 次）；明细：添加→有变化"
+      }
+    ],
+    "errors": [],
+    "warns": [
+      "预览沙箱为不透明源，已用内存垫片替代 localStorage；导出文件使用原生 localStorage"
+    ],
+    "stats": {
+      "textLen": 8,
+      "nodeCount": 5,
+      "interactiveCount": 2,
+      "externalCount": 0,
+      "clicked": 1,
+      "changed": 1,
+      "skipped": 0
+    },
+    "diagnostics": "",
+    "ts": 1794738403994
+  },
+  "success": true,
+  "summary": {
+    "verdict": "pass",
+    "checks": [
+      "JavaScript 运行时=pass",
+      "DOM 实际渲染=pass",
+      "可交互控件=pass",
+      "离线自包含=pass",
+      "真实点击探测=pass"
+    ],
+    "stats": {
+      "textLen": 8,
+      "nodeCount": 5,
+      "interactiveCount": 2,
+      "externalCount": 0,
+      "clicked": 1,
+      "changed": 1,
+      "skipped": 0
+    },
+    "errors": [],
+    "warns": [
+      "预览沙箱为不透明源，已用内存垫片替代 localStorage；导出文件使用原生 localStorage"
+    ]
+  }
+}

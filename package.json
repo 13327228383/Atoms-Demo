@@ -1,0 +1,14 @@
+{
+  "name": "atoms-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ROOT 全栈岗位笔试作业：智能体驱动的网页应用生成、可视化预览与自动冒烟自检",
+  "scripts": {
+    "start": "node server.js",
+    "test:probe": "node tests/probe_quick.js",
+    "test:e2e": "node tests/e2e_cdp.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
