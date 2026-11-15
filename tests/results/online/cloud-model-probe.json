@@ -1,0 +1,120 @@
+{
+  "mode": "fresh-no-cookie-browser / runtime model selection probe",
+  "base": "https://wbapp-y5wxetvgn0wc7wvssf372f.app.workbuddy.host/?sharecode=SY54IO7FE7",
+  "startedAt": "2026-11-15T15:30:18.463Z",
+  "note": "全新 user-data-dir，无历史 cookie / 无登录态；不发起 chat/completions，仅读取模型目录与选中模型。",
+  "browser": {
+    "started": true,
+    "version": "Chrome/151.0.7922.34"
+  },
+  "badge": "● Hy4 在线",
+  "runtime": {
+    "selectedModelId": "hy4free",
+    "selectedModelName": "Hy4",
+    "selectedModelEnabled": true,
+    "selectedModelKeys": [
+      "id",
+      "name",
+      "vendor",
+      "descriptionZh",
+      "descriptionEn",
+      "contextWindow",
+      "maxInputTokens",
+      "maxOutputTokens",
+      "enabled",
+      "credits",
+      "maxAllowedSize",
+      "disabledMultimodal",
+      "supportsImages",
+      "supportsToolCall",
+      "supportsReasoning",
+      "onlyReasoning",
+      "reasoning",
+      "temperature",
+      "top_p"
+    ],
+    "selectedModelRaw": {
+      "id": "hy4free",
+      "name": "Hy4",
+      "vendor": "j",
+      "descriptionZh": "最新旗舰模型，Agent与多模专长",
+      "descriptionEn": "Latest Flagship Model: Agentic and Multimodal Expertise",
+      "contextWindow": {
+        "defaultLength": 300000,
+        "supportedLengths": [
+          300000,
+          600000,
+          960000
+        ]
+      },
+      "maxInputTokens": 960000,
+      "maxOutputTokens": 64000,
+      "enabled": true,
+      "credits": "x0.00 credits",
+      "maxAllowedSize": 1000000,
+      "disabledMultimodal": false,
+      "supportsImages": true,
+      "supportsToolCall": true,
+      "supportsReasoning": true,
+      "onlyReasoning": true,
+      "reasoning": {
+        "defaultEffort": "high",
+        "supportedEfforts": [
+          "high"
+        ],
+        "summary": "auto",
+        "canDisableThinking": false
+      },
+      "temperature": 0.9,
+      "top_p": 1
+    },
+    "stateCloudSameId": true,
+    "modelCatalogSize": 17,
+    "serverConfig": {
+      "provider": "cloud",
+      "model": "云端免密钥模型（浏览器端 SDK 自动选型）",
+      "modelOnline": true,
+      "availableModels": [],
+      "hasApiKey": false
+    },
+    "documentCookie": "",
+    "localStorageKeys": [],
+    "href": "https://wbapp-y5wxetvgn0wc7wvssf372f.app.workbuddy.host/?sharecode=SY54IO7FE7",
+    "hasLoginRedirect": false
+  },
+  "network": [
+    {
+      "url": "https://wbapp-y5wxetvgn0wc7wvssf372f.app.workbuddy.host/?sharecode=SY54IO7FE7",
+      "status": 200,
+      "mime": "text/html"
+    },
+    {
+      "url": "https://wbapp-y5wxetvgn0wc7wvssf372f.app.workbuddy.host/api/config",
+      "status": 200,
+      "mime": "application/json"
+    },
+    {
+      "url": "https://wbapp-y5wxetvgn0wc7wvssf372f.app.workbuddy.host/.cloud/llm/models",
+      "status": 200,
+      "mime": "application/json"
+    },
+    {
+      "url": "https://wbapp-y5wxetvgn0wc7wvssf372f.app.workbuddy.host/api/config?sharecode=SY54IO7FE7",
+      "status": 200,
+      "mime": "application/json"
+    },
+    {
+      "url": "https://wbapp-y5wxetvgn0wc7wvssf372f.app.workbuddy.host/.cloud/llm/models",
+      "status": 200,
+      "mime": "application/json"
+    }
+  ],
+  "verdict": {
+    "noCookieAndNoLogin": true,
+    "modelCatalogReachable": true,
+    "selectedFreeModel": true,
+    "serverHasApiKey": false
+  },
+  "success": true,
+  "finishedAt": "2026-11-15T15:30:26.264Z"
+}
